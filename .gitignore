@@ -1,0 +1,4 @@
+*.dsp
+*.ncb
+*.plg
+Debug/
