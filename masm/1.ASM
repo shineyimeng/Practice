@@ -1,0 +1,26 @@
+DATAS SEGMENT
+    ORG 2000H   
+    X DB 10
+    Y DB 5
+    Z DB ?
+DATAS ENDS
+
+CODES   SEGMENT
+    ASSUME CS:CODES,DS:DATAS
+START:
+	MOV AX,DATAS
+    MOV DS,AX
+    
+    MOV AX,X
+    SUB AX,Y
+    MOV CX,7
+    MUL CX
+    MOV BX,2
+    ADD BX,Y
+    DIV BX
+    MOV Z,AL
+        
+    MOV AH,4CH   
+    INT 21H
+CODES ENDS
+    END START

@@ -1,4 +1,8 @@
 *.dsp
 *.ncb
 *.plg
+*.obj
+*.exe
+*.IMg
+*.com
 Debug/
