@@ -1,25 +1,31 @@
 DATAS SEGMENT
     ORG 2000H   
-    X DB 10
-    Y DB 5
-    Z DB ?
+    SUR1 DW 1,-1,100,100,100,-5,-6,-7,0ffh,0ah
+    N EQU $-SUR1
 DATAS ENDS
+DATAS1 SEGMENT
+    ORG 3000H
+    SUR2 DB N DUP(?) ;N=20
+DATAS1 ENDS
 
-CODES   SEGMENT
-    ASSUME CS:CODES,DS:DATAS
+CODES SEGMENT
+    ASSUME CS:CODES,DS:DATAS,ES:DATAS1
 START:
 	MOV AX,DATAS
     MOV DS,AX
+    MOV AX,DATAS1
+    MOV ES,AX 
     
-    MOV AX,X
-    SUB AX,Y
-    MOV CX,7
-    MUL CX
-    MOV BX,2
-    ADD BX,Y
-    DIV BX
-    MOV Z,AL
-        
+    LEA SI,SUR1
+    LEA DI,SUR2
+    MOV CX,N
+AGAIN:  MOV AL,[SI] ;因为传送的是16位数，传送时使用的是al要传送20次，ax要10次
+    MOV ES:[DI],AL
+    INC SI
+    INC DI
+    DEC CX   
+    JNZ AGAIN   
+    
     MOV AH,4CH   
     INT 21H
 CODES ENDS

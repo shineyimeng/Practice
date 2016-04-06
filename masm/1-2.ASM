@@ -17,7 +17,7 @@ START:
     
     MOV SI,2000H
     MOV DI,3000H
-    MOV CX,10
+    MOV CX,20
 AGAIN:  MOV AL,[SI]
     MOV ES:[DI],AL
     INC SI  
