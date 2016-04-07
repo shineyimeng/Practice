@@ -1,0 +1,29 @@
+DATAS SEGMENT
+    SUR DW 1,2,3,4,5,6,7,8
+    N EQU $-SUR
+    MIN DW 0
+DATAS ENDS
+
+CODES SEGMENT
+    ASSUME CS:CODES,DS:DATAS
+START:
+	MOV AX,DATAS
+    MOV DS,AX
+    
+    LEA SI,SUR
+    MOV CX,N/2
+    MOV AX,[SI]
+    MOV [MIN],AX
+LOP:
+    MOV AX,[SI]
+    CMP [MIN],AX
+    JB NEXT
+    MOV [MIN],AX
+NEXT:
+    ADD SI,2
+    LOOP LOP
+    
+    MOV AH,4CH   
+    INT 21H
+CODES ENDS
+    END START

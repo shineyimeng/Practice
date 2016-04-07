@@ -1,27 +1,27 @@
 DATAS SEGMENT
-    ORG 2000H   
-    SUR DB 1H,2H,3H,3H,5H,6H,7H,8H,9H,10H
-    SUM DB 0
+    SUR DB 1,2,3,4,5,6,7,8
+    N EQU $-SUR
+    MAX DB 0
 DATAS ENDS
-
 
 CODES SEGMENT
     ASSUME CS:CODES,DS:DATAS
 START:
 	MOV AX,DATAS
     MOV DS,AX
-  
+    
     LEA SI,SUR
     MOV CX,N
-AGAIN:  MOV BL,[SI]
-    ADD SUM,BL
-    JNC NEXT
-    ADD [SUM+1],1
-    
-NEXT:   INC SI
-    DEC CX
-    JNZ AGAIN
-   
+    MOV AL,[SI]
+    MOV [MAX],AL
+LOP:
+    MOV AL,[SI]
+    CMP [MAX],AL
+    JA NEXT
+    MOV [MAX],AL
+NEXT:
+    INC SI
+    LOOP LOP
     
     MOV AH,4CH   
     INT 21H
