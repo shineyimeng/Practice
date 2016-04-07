@@ -19,7 +19,7 @@ LOP:
     INC NEGATIVE
     
 EXIT:
-    INC SI
+    ADD SI,2
     LOOP LOP
     
     MOV AH,4CH   

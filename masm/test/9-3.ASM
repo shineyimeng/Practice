@@ -1,0 +1,25 @@
+DATA SEGMENT
+    INFO DB 0DH,0AH,20H,50,53,'$'
+DATA ENDS
+
+CODE SEGMENT
+    ASSUME DS:DATA,CS:CODE
+START:
+    MOV AX,DATA
+    MOV DS,AX
+    
+    LEA SI,INFO
+    ADD SI,2
+    MOV AL,[SI]
+    ADD AL,0CH
+    MOV [SI],AL
+    
+    
+    LEA DX,INFO
+    MOV AH,9
+    INT 21H
+    
+    MOV AH,4CH   
+    INT 21H
+CODE ENDS
+    END START

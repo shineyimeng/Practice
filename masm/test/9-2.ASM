@@ -1,0 +1,26 @@
+DATA SEGMENT
+    INFO DB 0DH,0AH,'INPUT STRING:$'
+    BUFFER DB 31
+        DB ?
+        DB 30 DUP(0)
+DATA ENDS
+
+CODE SEGMENT
+    ASSUME DS:DATA,CS:CODE
+START:
+    MOV AX,DATA
+    MOV DS,AX
+    
+    LEA DX,INFO
+    MOV AH,9
+    INT 21H
+
+    LEA DX,BUFFER
+    MOV AH,10
+    INT 21H
+    
+    
+    MOV AH,4CH   
+    INT 21H
+CODE ENDS
+    END START

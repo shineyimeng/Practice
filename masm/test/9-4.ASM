@@ -1,0 +1,28 @@
+DATA SEGMENT
+    DAT DB 1,2,3,4,5,6,7,8,9,0
+DATA ENDS
+
+CODE SEGMENT
+    ASSUME DS:DATA,CS:CODE
+START:
+    MOV AX,DATA
+    MOV DS,AX
+    
+    LEA BX,DAT
+    MOV CX,10
+NEXT:
+    MOV AL,[BX]
+    ADD AL,30H
+    MOV DL,AL
+    MOV AH,2
+    INT 21H
+    INC BX
+    DEC CX
+    JNZ NEXT
+    MOV AH,2
+    INT 21H
+    
+    MOV AH,4CH   
+    INT 21H
+CODE ENDS
+    END START
