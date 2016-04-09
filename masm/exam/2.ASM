@@ -1,6 +1,6 @@
 DATAS SEGMENT
     ORG 2000H   
-    SUR DW 07FFFH,07FFFH,1,1,-1,100,2,8,9,10
+    SUR DW 1,2,1,1,-1,100,2,8,9,10
     N EQU $-SUR
     SUM DW ?
 DATAS ENDS
@@ -13,14 +13,11 @@ START:
   
     LEA SI,SUR
     MOV CX,N/2
+    MOV SUM,0
+    ADD SUM,0
 AGAIN:
     MOV BX,[SI]
-    ADD SUM,BX
-    JNO NEXT
-    ADD [SUM+2],1
-    AND SUM,07FFFH
-    
-NEXT:
+    ADC SUM,BX
     ADD SI,2
     DEC CX
     JNZ AGAIN
