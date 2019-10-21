@@ -6,5 +6,7 @@
 *.IMg
 *.com
 *.asv
+*.txt
+*.docx
 Debug/
 .vscode/
